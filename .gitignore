@@ -1,0 +1,32 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# ---- Virtual environment ----
+.venv/
+venv/
+ENV/
+env/
+
+# ---- Jupyter / IDE ----
+.ipynb_checkpoints/
+.vscode/
+*.code-workspace
+
+# ---- OS / Editor files ----
+.DS_Store
+Thumbs.db
+
+# ---- Build / Distribution ----
+dist/
+build/
+*.egg-info/
+
+# ---- Logs ----
+*.log
+
+# ---- Shiny temp (if any) ----
+shiny_cache/
