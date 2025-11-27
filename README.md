@@ -49,6 +49,7 @@ This is Project 4 in a broader portfolio of energy-system models.
 
 ## 📦 Project Structure
 
+```
 transformer_thermal_aging/
 ├── app/
 │ └── app_shiny.py # Shiny UI + Server
@@ -65,3 +66,5 @@ transformer_thermal_aging/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
+
