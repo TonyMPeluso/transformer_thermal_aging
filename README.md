@@ -185,6 +185,11 @@ Together, they demonstrate expertise in:
 - machine learning and forecasting
 - climate risk analysis
 
-## 📜 License
+## 📄 License
 
-MIT License (see LICENSE.txt)
+MIT License (see LICENCE.txt)
+
+## 👤 Author
+
+Tony Peluso, PhD Energy Modelling & Grid Analytics — Montreal, QC
+📧 tonympeluso@gmail.com 🔗 GitHub: https://github.com/TonyMPeluso 🔗 LinkedIn: https://www.linkedin.com/in/tony-peluso-phd
