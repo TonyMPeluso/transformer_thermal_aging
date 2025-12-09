@@ -191,6 +191,7 @@ Together, they demonstrate expertise in:
 - optimization
 - interactive dashboards for utility decision-making
 - machine learning and forecasting
+- climate risk analysis
 
 ## 📜 License
 
