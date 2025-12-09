@@ -128,25 +128,17 @@ transformer_thermal_aging/
 
 ## 📊 Example Outputs (descriptions)
 
-(You can add actual images if desired)
+Summary KPIs, Histogram and Time Series
+<div style="display: flex; justify-content: space-around;">
+  <img src="assets/Summary_kpis.png" height="200">
+  <img src="assets/Histogram.png" height="200">
+  <img src="assets/Time_series.png" height="200">
+</div>
 
-• Peak Hot-Spot Temperature Distribution
-
-Histogram showing how often the transformer reaches critical temperatures.
-
-• Mean ± 2σ Temperature Band
-
-Time-series enveloping uncertainty in heating + EV behavior.
-
-• CDF of Peak Temperatures
-
-Probability transformer exceeds 120°C under cold weather + EV load.
-
-• KPI Summary
-Scenario	LOL%	Peak HST	Exceedance Probability
-Baseline	0.92%	128°C	32%
-DR (30%)	0.51%	118°C	5%
-Δ	−45%	−10°C	−27 pp
+Cumulative Distribution Function
+<p align="left">
+  <img src="assets/CDF.png" width="60%" />
+</p>
 
 ## ▶️ Running the Simulator
 1. Install dependencies
