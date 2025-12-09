@@ -35,84 +35,58 @@ It is designed as a fast, modular tool for planners, reliability engineers, and 
 ### 1️⃣ Monte Carlo Household Load Simulation
 
 Each household is modeled as an independent stochastic agent:
-
-Baseload drawn from diversified statistical profiles
-
-EV charging with random arrival time, start-of-charge SOC, and charging duration
-
-Heating based on thermostat deadbands & outdoor temperature
-
-Participation in optional DR events
+- Baseload drawn from diversified statistical profiles
+- EV charging with random arrival time, start-of-charge SOC, and charging duration
+- Heating based on thermostat deadbands & outdoor temperature
+- Participation in optional DR events
 
 Transformers aggregate these household loads to produce a probabilistic time-series of kVA demand.
 
-2️⃣ Thermal Modeling (IEC/IEEE C57.91)
+### 2️⃣ Thermal Modeling (IEC/IEEE C57.91)
 
 Implements the industry-standard model:
-
-Top-Oil Rise Over Ambient (TOA)
-
-Hot-Spot Rise Over Top-Oil (HST)
-
-Dynamic thermal time constants
-
-Winding temperature response
-
-Instantaneous and 24-hr Loss-of-Life (LOL) via Arrhenius aging acceleration factor
+- Top-Oil Rise Over Ambient (TOA)
+- Hot-Spot Rise Over Top-Oil (HST)
+- Dynamic thermal time constants
+- Winding temperature response
+- Instantaneous and 24-hr Loss-of-Life (LOL) via Arrhenius aging acceleration factor
 
 Outputs include:
+- Max HST per simulated day
+- Full temperature time-series
+- Daily aging factor and percent LOL
 
-Max HST per simulated day
-
-Full temperature time-series
-
-Daily aging factor and percent LOL
-
-3️⃣ KPI Computation Across Monte Carlo Runs
+### 3️⃣ KPI Computation Across Monte Carlo Runs
 
 The simulator produces statistical distributions for:
-
-Peak HST
-
-Daily LOL (percent of design life lost)
-
-Probability of critical exceedances:
-
-110°C (normal aging)
-
-120°C (accelerated aging)
-
-140°C (emergency limit)
+- Peak HST
+- Daily LOL (percent of design life lost)
+- Probability of critical exceedances:
+  - 110°C (normal aging)
+  - 120°C (accelerated aging)
+  - 140°C (emergency limit)
 
 Comparisons are automatically generated for:
-
-Baseline scenario (no DR)
-
-DR scenario (user-selected participation rate)
+- Baseline scenario (no DR)
+- DR scenario (user-selected participation rate)
 
 ΔKPIs quantify the reliability benefit of DR actions.
 
-4️⃣ Interactive Dashboard (Shiny for Python)
+### 4️⃣ Interactive Dashboard (Shiny for Python)
 
 The dashboard (optional but included) provides intuitive exploration:
-
-Histogram: distribution of peak HST
-
-Time-series confidence band: mean ± 2σ
-
-CDF plot: probability of exceeding thresholds
-
-Summary table: Baseline vs DR vs Δ
+- Histogram: distribution of peak HST
+- Time-series confidence band: mean ± 2σ
+- CDF plot: probability of exceeding thresholds
+- Summary table: Baseline vs DR vs Δ
 
 This is ideal for:
+- presenting results to utility planners
+- exploring sensitivity cases
+- scenario communication with stakeholders
 
-presenting results to utility planners
-
-exploring sensitivity cases
-
-scenario communication with stakeholders
-
-📂 Project Structure
+## 📂 Project Structure
+```
 transformer_thermal_aging/
 ├── app/
 │   └── app_shiny.py          # Shiny UI + server logic
@@ -129,38 +103,30 @@ transformer_thermal_aging/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
 
-🧪 How It Works (Technical Flow)
+## 🧪 How It Works (Technical Flow)
+1 - Generate household load profiles
+- Baseload + heating + EV charging
+- Randomized per run
 
-Generate household load profiles
+2 - Aggregate to transformer load
+- kVA time-series computed at 15-min / 1-min granularity
 
-Baseload + heating + EV charging
+3 - Apply IEC/IEEE C57.91
+- Compute TOA(t), HST(t), LOL(t)
 
-Randomized per run
+4 - Repeat for N Monte Carlo runs
+- Collect peak HST and LOL per iteration
 
-Aggregate to transformer load
+5 - Compare baseline vs DR scenario
+- DR reduces heating or shifts EV charging
+- Compute ΔKPIs
 
-kVA time-series computed at 15-min / 1-min granularity
+6 - Visualize results
+- Shiny dashboard plots scenarios side-by-side
 
-Apply IEC/IEEE C57.91
-
-Compute TOA(t), HST(t), LOL(t)
-
-Repeat for N Monte Carlo runs
-
-Collect peak HST and LOL per iteration
-
-Compare baseline vs DR scenario
-
-DR reduces heating or shifts EV charging
-
-Compute ΔKPIs
-
-Visualize results
-
-Shiny dashboard plots scenarios side-by-side
-
-📊 Example Outputs (descriptions)
+## 📊 Example Outputs (descriptions)
 
 (You can add actual images if desired)
 
@@ -181,65 +147,51 @@ Scenario	LOL%	Peak HST	Exceedance Probability
 Baseline	0.92%	128°C	32%
 DR (30%)	0.51%	118°C	5%
 Δ	−45%	−10°C	−27 pp
-▶️ Running the Simulator
+
+## ▶️ Running the Simulator
 1. Install dependencies
+```
 pip install -r requirements.txt
-
+```
 2. Run a batch Monte Carlo simulation
+```
 python -m src.simulate_transformers
-
-
+```
 Outputs will be saved to /results or console depending on config.
 
 3. Launch the Shiny Dashboard
+```
 shiny run --reload app/app_shiny.py
-
-🔧 Configuration
+```
+## 🔧 Configuration
 
 The simulator accepts (via config or UI):
+- number of households
+- transformer kVA rating
+- EV adoption rate
+- heating type & thermostat settings
+- ambient temperature file
+- DR participation rate
+- number of Monte Carlo runs
 
-number of households
-
-transformer kVA rating
-
-EV adoption rate
-
-heating type & thermostat settings
-
-ambient temperature file
-
-DR participation rate
-
-number of Monte Carlo runs
-
-🧭 Portfolio Context
+## 🧭 Portfolio Context
 
 This project is part of a broader modeling suite:
-
-Feeder-level microsimulation
-
-Transformer EV load dashboard
-
-Investment optimization LP
-
-Financial risk dashboard (EVT)
-
-ZEV adoption mapping + census analysis
+- Feeder-level microsimulation
+- Transformer EV load dashboard
+- Investment optimization LP
+- Financial risk dashboard (EVT)
+- ZEV adoption mapping + census analysis
 
 Together, they demonstrate expertise in:
+- electrification modeling
+- distribution planning
+- thermal reliability analysis
+- stochastic simulation
+- optimization
+- interactive dashboards for utility decision-making
+- machine learning and forecasting
 
-electrification modeling
-
-distribution planning
-
-thermal reliability analysis
-
-stochastic simulation
-
-optimization
-
-interactive dashboards for utility decision-making
-
-📜 License
+## 📜 License
 
 MIT License (see LICENSE.txt)
